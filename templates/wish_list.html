@@ -1,0 +1,50 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% load i18n %}
+{% load my_tags %}
+{% block content %}
+    <section class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__text">
+                        <h4>Wishlist</h4>
+                        <div class="breadcrumb__links">
+                            <a href="{% url 'pages:home' %}">Home</a>
+                            <span>Wishlist</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="shop spad">
+        <div class="container">
+
+            <div class="row">
+                {% for products in object_list %}
+                    <div class="col-lg-3 col-md-4 col-sm-4">
+                        {% include 'layouts/product_block.html' %}
+                    </div>
+                {% empty %}
+                    <h4>List is empty</h4>
+                {% endfor %}
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    {% if object_list %}
+                        <div class="product__pagination">
+                            {% for page in page_obj.paginator.page_range %}
+                                <a {% if page == page_obj.number %}class="active"{% endif %}
+                                   href="?page={{ page }}">{{ page }}</a>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+
+

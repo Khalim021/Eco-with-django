@@ -1,0 +1,51 @@
+{% extends 'layouts/base.html' %}
+{% load my_tags %}
+
+{% block content %}
+    <section class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__text">
+                        <h4>Order history</h4>
+                        <div class="breadcrumb__links">
+                            <a href="{% url 'pages:home' %}">Home</a>
+                            <span>Order history</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="shopping-cart spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>ID</th>
+                            <th>Products</th>
+                            <th>Price</th>
+                            <th>Created at</th>
+                        </tr>
+                        {% for order in object_list %}
+                            <tr>
+                                <td>{{ order.pk }}</td>
+                                <td>
+                                    <ul class="ml-3">
+                                        {% for product in order.products.all %}
+                                            <li>{{ product.title }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                </td>
+                                <td>{{ order.price }}</td>
+                                <td>{{ order.created_at }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

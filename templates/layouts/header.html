@@ -1,0 +1,283 @@
+{% block extra_css %}
+    <style>
+        .search {
+            position: absolute;
+            top: 80%;
+            left: 60%;
+            -webkit-transform: translateX(-50%) translateY(-50%);
+            transform: translateX(-100%) translateY(-103%);
+        }
+
+        .search * {
+            outline: none;
+            box-sizing: border-box;
+        }
+
+        .search__wrapper {
+            position: relative;
+        }
+
+        .search__field {
+            width: 50px;
+            height: 50px;
+            color: transparent;
+            font-family: Lato, sans-serif;
+            font-size: 1.25em;
+            padding: 0.35em 50px 0.35em 0;
+            border: 1px solid transparent;
+            border-radius: 0;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .search__field:focus {
+            position: relative;
+        {#border-bottom-color: #ccc;#} width: 14vw;
+            color: #2b2b2b;
+            cursor: default;
+
+        }
+
+        .search__field:focus ~ .search__icon {
+            background-color: transparent;
+            cursor: pointer;
+            pointer-events: auto;
+        }
+
+        .search__icon {
+            position: absolute;
+            top: 1px;
+            right: 2vh;
+            width: 50px;
+            height: 50px;
+            font-size: 1.35em;
+            text-align: center;
+            border-color: transparent;
+            border-radius: 50%;
+            pointer-events: none;
+            display: inline-block;
+            transition: background-color 0.2s ease-in-out;
+            background-color: white;
+        }
+
+        .search__field::-webkit-input-placeholder {
+            position: relative;
+            top: 0;
+            left: 0;
+            transition-property: top, color;
+            transition-duration: .1s;
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+
+        }
+
+        .search__field:-moz-placeholder {
+            position: relative;
+            top: 0;
+            left: 0;
+            transition-property: top, color;
+            transition-duration: .1s;
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+
+        }
+
+        .search__field::-moz-placeholder {
+            position: relative;
+            top: 0;
+            left: 0;
+            transition-property: top, color;
+            transition-duration: .1s;
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+
+        }
+
+        .search__field:-ms-input-placeholder {
+            position: relative;
+            top: 0;
+            left: 0;
+            transition-property: top, color;
+            transition-duration: .1s;
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+
+        }
+
+        .search__field::-webkit-input-placeholder[style*=hidden] {
+            color: #83b0c1;
+            font-size: .50em;
+            font-weight: normal;
+            top: -20px;
+            opacity: 1;
+            visibility: visible !important;
+        }
+
+        .search__field:-moz-placeholder[style*=hidden] {
+            color: #83b0c1;
+            font-size: .50em;
+            font-weight: normal;
+            top: -20px;
+            opacity: 1;
+            visibility: visible !important;
+        }
+
+        .search__field::-moz-placeholder[style*=hidden] {
+            color: #83b0c1;
+            font-size: .50em;
+            font-weight: normal;
+            top: -20px;
+            opacity: 1;
+            visibility: visible !important;
+        }
+
+        .search__field:-ms-input-placeholder[style*=hidden] {
+            color: #83b0c1;
+            font-size: .50em;
+            font-weight: normal;
+            top: -20px;
+            opacity: 1;
+            visibility: visible !important;
+        }
+
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700">
+{% endblock %}
+
+{% load static %}
+
+{% load i18n %}
+
+{% load my_tags %}
+
+<div class="offcanvas-menu-overlay"></div>
+<div class="offcanvas-menu-wrapper">
+    <div class="offcanvas__option">
+        <div class="offcanvas__links">
+            <a href="#">
+                {% blocktrans %}Sign in{% endblocktrans %}
+            </a>
+            <a href="#">
+                {% trans 'FAQs' %}
+            </a>
+        </div>
+        <div class="offcanvas__top__hover">
+            {% get_current_language as lang %}
+            <span>{{ lang }}<i class="arrow_carrot-down"></i></span>
+            <ul>
+                {% get_available_languages as all_langs %}
+                {% for l in all_langs %}
+                    {% if l.0 != lang %}
+                        <li>
+                            <a style="color: #111; text-decoration: none" href="{% get_lang_url request l.0 %}"></a>
+                        </li>
+                    {% endif %}
+
+                {% endfor %}
+
+            </ul>
+        </div>
+    </div>
+    <div class="offcanvas__nav__option">
+        <a href="#" class="search-switch"><img src="{% static 'img/icon/search.png' %}" alt=""></a>
+        <a href="#"><img src="{% static 'img/icon/heart.png' %}" alt=""></a>
+        <a href="#"><img src="{% static 'img/icon/cart.png' %}" alt=""> <span>0</span></a>
+        <div class="price">$0.00</div>
+    </div>
+    <div id="mobile-menu-wrap"></div>
+    <div class="offcanvas__text">
+    </div>
+</div>
+<header class="header">
+    <div class="header__top">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-7">
+                    <div class="header__top__left">
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-5">
+                    <div class="header__top__right">
+                        <div class="header__top__links">
+                           {% if request.user.is_authenticated %}
+                             <a href="{% url 'profile:home' %}">{% trans 'Profile' %}</a>
+                             <a href="">{% trans 'History' %}</a>
+                             <a href="{% url 'auth_logout' %}">{% trans 'Log out' %}</a>
+                            {% else %}
+                            <a href="{% url 'auth_login' %}">{% trans 'Sign in' %}</a>
+                            {% endif %}
+                        </div>
+                        <div class="header__top__hover">
+                            {% get_current_language as lang %}
+                            <span>{{ lang }}<i class="arrow_carrot-down"></i></span>
+                            <ul>
+                                {% get_available_languages as all_langs %}
+                                {% for l in all_langs %}
+                                    {% if l.0 != lang %}
+                                        <li>
+                                            <a style="color: #111; text-decoration: none"
+                                               href="{% get_lang_url request l.0 %}">{{ l.0|upper }}</a>
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-3">
+                <div class="header__logo">
+                    <a href="{% url 'pages:home' %}"><img src="{% static 'img/logo.png' %}" alt=""></a>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <nav class="header__menu mobile-menu">
+                    <ul>{% url 'pages:home' as home_url %}
+                        <li class="{% if request.path == home_url %} active {% endif %}">
+                            <a href="{% url 'pages:home' %}">{% trans 'Home' %}</a>
+                        </li>
+                        <li class="{% if '/products/' in request.path %} active {% endif %}"><a
+                                href="{% url 'products:list' %}">{% trans 'Products' %}</a>
+                        </li>
+                        <li class="{% if '/blog/' in request.path %} active {% endif %}"><a
+                                href="{% url 'posts:list' %}">{% trans 'Blog' %}</a></li>
+                        <li class="{% if '/about/' in request.path %} active {% endif %}"><a
+                                href="{% url 'pages:about' %}">{% trans 'About' %}</a></li>
+                        <li class="{% if '/contact/' in request.path %} active {% endif %}"><a
+                                href="{% url 'pages:contact' %}">{% trans 'Contact' %}</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="col-lg-3 col-md-3">
+                <div class="header__nav__option">
+                    <form action="{% url 'products:list' %}" class="search">
+                        <div class="search__wrapper">
+                            <input type="text" name="q" placeholder="Search..." class="search__field">
+                            <button type="submit" class="fa fa-search search__icon"></button>
+                        </div>
+                    </form>
+                    <a href="/"><img src="{% static 'img/icon/heart.png' %}" alt=""></a>
+                    <a href="{% url 'products:wishlist' %}">
+                        <img src="{% static 'img/icon/cart.png' %}" alt="">
+                        <span>{% cart_count request %}</span></a>
+                    <div class="price">{% cart_price request %}</div>
+                </div>
+            </div>
+        </div>
+        <div class="canvas__open"><i class="fa fa-bars"></i></div>
+    </div>
+</header>
+

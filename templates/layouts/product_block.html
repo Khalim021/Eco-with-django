@@ -1,0 +1,66 @@
+{% load static %}
+{% load my_tags %}
+
+<div class="product__item sale">
+    <div class="product__item__pic set-bg"
+         data-setbg="{{ products.image.url }}">
+        {% if products.is_discount %}
+            <span class="label">Sale</span>
+        {% endif %}
+        {% if product.is_new %}
+            <span class="label {% if product.is_discount %}mt-4{% endif %}">New</span>
+        {% endif %}
+        <ul class="product__hover">
+            <li>
+                <a href="{% url 'products:add-wishlist' pk=products.pk %}?next={{ request.path }}?{{ request.GET.urlencode }}">
+                    {% if products|in_wishlist:request %}
+                        <img src="{% static 'img/icon/heartr.png' %}" alt="">
+                    {% else %}
+                        <img src="{% static 'img/icon/heart.png' %}" alt="">
+                    {% endif %}
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'products:detail' pk=products.pk %}">
+                    <img src="{% static 'img/icon/search.png' %}" alt="">
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="product__item__text">
+        <h6>{{ products.title }}</h6>
+        <a href="{% url 'products:add-to-cart' pk=products.pk %}?next={{ request.path }}?{{ request.GET.urlencode }}"
+           class="add-cart">
+            {% if products|in_cart:request %}
+                - Remove From Cart
+            {% else %}
+                + Add To Cart
+            {% endif %}
+        </a>
+        <div class="rating">
+            <i class="fa fa-star-o"></i>
+            <i class="fa fa-star-o"></i>
+            <i class="fa fa-star-o"></i>
+            <i class="fa fa-star-o"></i>
+            <i class="fa fa-star-o"></i>
+        </div>
+        <h5>${{ products.real_price }}
+            {% if products.is_discount %}
+                <strike class="small">{{ products.price }}</strike>
+            {% endif %}
+        </h5>
+        <div class="product__color__select">
+            <label for="pc-4">
+                <input type="radio" id="pc-4">
+            </label>
+            <label class="active black" for="pc-5">
+                <input type="radio" id="pc-5">
+            </label>
+            <label class="grey" for="pc-6">
+                <input type="radio" id="pc-6">
+            </label>
+        </div>
+    </div>
+</div>
+
+

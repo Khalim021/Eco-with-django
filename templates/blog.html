@@ -1,0 +1,54 @@
+{% extends 'layouts/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+    <section class="breadcrumb-blog set-bg" data-setbg="{% static 'img/breadcrumb-bg.jpg' %}">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>
+                        {% if request.GET.tag %}
+                            #{{ request.GET.tag }}
+                        {% else %}
+                            Blog
+                        {% endif %}
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="blog spad">
+        <div class="container">
+            <div class="row">
+                {% for post in object_list %}
+                    <div class="col-lg-4 col-md-6 col-sm-6">
+                        <div class="blog__item">
+                            <div class="blog__item__pic set-bg" data-setbg="{{ post.image.url }}"></div>
+                            <div class="blog__item__text">
+                                <span><img src="{% static 'img/icon/calendar.png' %}"
+                                           alt="">{{ post.created_at|date:'d F Y' }}</span>
+                                <h5>{{ post.title }}</h5>
+                                <a href="{% url 'posts:detail' pk=post.pk %}">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="product__pagination">
+                        {% for page in page_obj.paginator.page_range %}
+                            <a {% if page == page_obj.number %}class="active"{% endif %}
+                               href="?page{{ page }}">{{ page }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+
+
