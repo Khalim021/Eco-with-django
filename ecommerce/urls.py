@@ -28,6 +28,7 @@ urlpatterns += i18n_patterns(
     path('accounts/', include('auth.urls')),
     path('admin/', admin.site.urls),
     path('blog/', include('posts.urls', namespace='posts')),
+    path('api/', include('api.urls', namespace='api')),
     path('orders/', include('orders.urls', namespace='orders')),
     path('profile/', include('users.urls', namespace='profile')),
     path('', include('pages.urls', namespace='pages')),

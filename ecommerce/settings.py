@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'rest_framework',
     'ckeditor',
     'ckeditor_uploader',
 
@@ -169,6 +170,12 @@ EMAIL_USE_TLS = True
 
 EMAIL_HOST_USER = 'hotdogeat777@gmail.com'
 EMAIL_HOST_PASSWORD = '.....'
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny'
+    ]
+}
 
 
 # Default primary key field type
