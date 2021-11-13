@@ -5,7 +5,7 @@ from ckeditor_uploader.fields import RichTextUploadingField
 from django.contrib.auth import get_user_model
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
-from django.http import request
+
 from django.utils.translation import ugettext_lazy as _
 
 UserModel = get_user_model()
@@ -115,7 +115,7 @@ class ProductModel(models.Model):
         return diff.days <= 5
 
     def get_related_products(self):
-        return self.category.products.exclude(pk=self.pk)
+        return self.    category.products.exclude(pk=self.pk)
 
     class Meta:
         verbose_name = _('product')
